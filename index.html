@@ -176,4 +176,25 @@
         });
 
         // Event listener for the reset button
-        resetButton.addEv
+        resetButton.addEventListener('click', resetTimer);
+
+        // Event listener for the new add time button
+        addTimeButton.addEventListener('click', () => {
+            const wasTimeZero = (timeLeft === 0); // Check if time was zero before adding
+            timeLeft += 30; // Add 30 seconds
+            updateDisplay(); // Update display immediately to reflect new time
+
+            // If the timer had expired before adding time, start it automatically
+            // If it was already running or paused (not zero), it continues its current state
+            if (wasTimeZero && !isRunning) {
+                startTimer();
+            }
+        });
+
+        // Initial display update when the page loads
+        window.onload = function() {
+            updateDisplay();
+        };
+    </script>
+</body>
+</html>
